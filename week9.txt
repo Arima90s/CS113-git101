@@ -1,0 +1,82 @@
+คำสั่ง git พื้นฐาน
+***การสร้าง directory*** 
+mkdir <ชื่อไฟล์ที่ต้องการสร้าง>  commmand prompt<window> และ Terminal <Mac> /Bash <linux>
+
+***การดูรายการ directories และ files ใน working directory ปัจจุบัน***
+dir commmand prompt<window>
+ls Terminal<Mac> / Bash <linux>
+
+***เปลี่ยน drive D:***
+d: commmand prompt <window>
+* Mac ไม่มี drrive D *
+
+***เปลี่ยน working directory ***
+cd <ชื่อไฟล์ที่ต้องการย้ายไป> commmand prompt <window> และ Terminal <Mac> /Bash <linux>
+
+***เปลี่ยน working directory เป็น root directory***
+cd / ทั้ง commmand และ Terminal
+การสร้าง branch / แยก branch
+ใช้คำสั่ง git branch คือ การตรวจสอบ ว่ามี branch อะไรบ้าง
+ถ้ายังไม่ได้สร้าง branch ใหม่เพิ่มเข้ามา จะมี branch master อยู่
+
+****************************************************
+***การใช้งาน git***
+สร้าง directory ที่เก็บงาน (สมมติชื่อ git101) แล้วเปลี่ยน working directory ไปยัง directory นั้น
+    mkdir git101
+    -เปลี่ยน directory-
+    cd git101
+
+Initialize git repository(git project) *ทำทุกครั้งที่มีการ git repository ใหม่เพิ่มเข้ามา
+    git Initialize
+    -สังเกตุว่าจะมี directory ชื่อ .git ขึ้นมา
+    **หากไม่ขึ้นให้กด view > ติ๊ก hidden item
+แล้วเราจะสร้างไฟล์งาน หรือแก้ไขอะไรก็ได้ เมื่อเราทำการเซฟไฟล์งาน
+ให้พิมพ์ คำสั่ง git status เพื่อตรวจสอบว่ามีการเปลี่ยนแปลงใน git repository หรือไม่
+**ควรตรวจสอบทุกครั้ง
+แล้วจะขึ้นสถานะมา ว่ามีไฟล์ใดบ้าง
+
+เพิ่มไฟล์เข้า staging area เพื่อเตรียมพร้อมการ commit แล้วตรวจสอบสถานะอีกครั้ง
+    git add <ชื่อไฟล์ที่เพิ่มเข้ามา.นามสกุลไฟล์> 
+        Ex. git add a.txt
+    git status **เช็คทุกครั้ง
+
+---การระบุตัวผู้ commit---
+git config user.name "ชื่อของเรา"
+git config user.email "เมลล์ของเรา"
+--ถ้าเป็นเครื่องส่วนตัว ให้ใส่ option -- global ด้วย
+git config --global user.name "ชื่อของเรา"
+git config --global user.email "เมลล์ของเรา"
+
+---ขั้นนี้ทำเพียงครั้งเดียว---
+
+***commit ไฟล์ เพื่อเป็น checkpoint ของไฟล์
+git commit -m "Add a.txt"
+
+เมื่อ แก้ไขเสร็จแล้ว อย่าลืมใช้ git status เพื่อเช็คว่ามีการเปลี่ยนแปลงไหม
+
+เราสามรถดู checkpoint ทั้งหมดได้ด้วย git log adog
+    git log --all --decorate --oneline --graph
+จากนั้นทำการเชื่อมต่อกับ github
+--เชื่อม local repository (git repo ในเครื่องเรา) กับ git hub ด้วยคำสั่ง
+    git remote add origin <git url>
+--- เมื่อเชื่อม local ในเครื่อง กัย remote ที่ github ได้แล้ว ให้ส่งไฟล์และประวัติไปเก็บไว้ที่ github ด้วยคำสั่ง git push
+    git push -u origin master
+origin คือ ชื่อ remote repository ที่เราตั้งขึ้น
+master คือ branch หลักที่ได้มาตั้งแต่การสร้าง git repository (ตอนสั่ง git init)
+-u คือ option ที่กำหนดไว้ว่า ในการใช้คำสั่ง git push ครั้งต่อไป ให้ push branch ของ remote ใด
+
+ตรวจสอบ checkpoint ทั้งหมดในเครื่องของเรา จะเห็นว่า checkpoint ของเราเก็บไว้ที่ origin/master ด้วย
+    git log --all --decorate --oneline --graph
+ให้ลองนำกลับมาบางไฟล์ก่อน โดยใช้คำสั่ง (commit-id เป็น commit-id อันแรกสุดเลย)
+    git checkout <commit-id> ___.txt
+
+การ push ขึ้นไปที่ server 
+    git push
+
+ไม่ต้องใช้ -u เพราะว่าเราอยู่ที่ origin/master 
+เราสามารถเปลี่ยน มาที่ master โดยการ git branch master มาก้ได้
+****************************************************
+การสร้าง branch <ชื่อ branch ที่จะสร้าง>
+การย้าย branch ทำได้โดยการใช้คำสั่ง 
+git checkout <ชื่อ branch ที่ต้องการจะย้ายไป>
+"สังเกตุการย้ายได้จาก * จะอยู่หน้า branch นั้น "
